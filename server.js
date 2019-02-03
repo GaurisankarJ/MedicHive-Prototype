@@ -22,6 +22,10 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
+app.get("/public/images/homepage-illustration.png", (req, res) => {
+    res.sendFile(__dirname + "/public/images/homepage-illustration.png");
+});
+
 var listener = app.listen(port, () => {
     console.log(`Server listening on port ${listener.address().port}!`);
 });
