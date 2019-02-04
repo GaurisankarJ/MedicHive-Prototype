@@ -1,10 +1,11 @@
 const express = require("express");
 const fs = require("fs");
+const axios = require("axios");
 
 const port = process.env.PORT || 3001;
 const app = express();
 
-app.use(express.static(__dirname + "/public"));//Using static assets
+app.use(express.static(__dirname + "/public"));
 app.use((req, res, next) => {
     var now = new Date().toString();
     var log = `${now}: ${req.method} ${req.url}`;
@@ -18,8 +19,15 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-    console.log(__dirname);
-    res.sendFile(__dirname + "/public/index.html");
+    axios({
+        method: "get",
+        url: "https://medic-hive-server.herokuapp.com/",
+    }).then((server) => {
+        res.sendFile(__dirname + "/index.html");
+    }).catch((err) => {
+        console.log(err);
+        res.status(404).send();
+    });
 });
 
 app.get("/public/images/homepage-illustration.png", (req, res) => {
