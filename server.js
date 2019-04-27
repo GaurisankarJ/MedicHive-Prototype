@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
     axios({
         method: "get",
         url: "https://medic-hive-server.herokuapp.com/",
-    }).then((server) => {
+    }).then(() => {
         res.sendFile(__dirname + "/index.html");
     }).catch((err) => {
         console.log(err);
